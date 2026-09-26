@@ -1,87 +1,62 @@
-# 🛡️ AI-SOC Analytics Platform
+🛡️ AI-SOC Analytics Platform
+An AI-powered Security Operations Center (SOC) platform for real-time threat detection, alert investigation, explainable AI scoring, threat intelligence enrichment, attack-chain visualization, and automated response (SOAR).
 
-> An AI-powered Security Operations Center (SOC) platform for real-time threat detection, alert investigation, explainable AI scoring, threat intelligence enrichment, attack-chain visualization, and automated response (SOAR).
+Python FastAPI React Docker GitHub Actions License
 
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green)
-![React](https://img.shields.io/badge/React-19-61DAFB)
-![Docker](https://img.shields.io/badge/Docker-Ready-blue)
-![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-success)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-
----
-
-## Contents
-
-- [Overview](#overview)
-- [Key Capabilities](#key-capabilities)
-- [Threat Detection Modules](#threat-detection-modules)
-- [Technology Stack](#technology-stack)
-- [System Architecture](#system-architecture)
-- [Project Structure](#project-structure)
-- [Quick Start](#quick-start)
-- [Configuration](#configuration)
-- [Running Locally](#running-locally)
-- [API Overview](#api-overview)
-- [Machine Learning and Explainability](#machine-learning-and-explainability)
-- [Testing](#testing)
-- [Contributors](#contributors)
-- [License](#license)
-
----
-
-## Overview
-
+Contents
+Overview
+Key Capabilities
+Threat Detection Modules
+Technology Stack
+System Architecture
+Project Structure
+Quick Start
+Configuration
+Running Locally
+API Overview
+Machine Learning and Explainability
+Testing
+Contributors
+License
+Overview
 AI-SOC Analytics Platform combines a FastAPI backend, a React dashboard, machine-learning services, and SOC operations workflows into one system. It ingests security logs, detects suspicious activity across 10+ attack techniques, scores alerts with explainable AI, enriches indicators with external threat intelligence, maps activity to MITRE ATT&CK, visualizes attack chains, generates investigation reports, and lets analysts trigger automated response actions — all from a single dashboard.
 
-## Key Capabilities
-
-### Detection and monitoring
-- Log parsing and ingestion, including bulk log-file upload
-- Rule-based and ML-assisted detection across 10 techniques (see below)
-- Alert filtering, correlation, severity scoring, and dashboard statistics
-
-### Investigation and response
-- AI investigation copilot for natural-language alert analysis
-- Explainable threat scoring with human-readable risk factors
-- MITRE ATT&CK technique mapping and attack-chain visualization
-- SOAR actions: block an IP, disable a user, kill a process, and auto-generate Sigma, Snort, or YARA rules
-- Incident report generation and download (PDF, DOCX, HTML, Markdown)
-
-### Threat intelligence
-- VirusTotal, AbuseIPDB, WHOIS, and GeoIP lookups
-- IP reputation analysis
-
-## Threat Detection Modules
-
-| Detector | MITRE ATT&CK technique |
-| --- | --- |
-| Brute force | T1110 |
-| Password spray | T1110.003 |
-| Impossible travel | T1550 |
-| Port scan | T1046 |
-| Credential dumping | T1003 |
-| Privilege escalation | T1068 |
-| PowerShell abuse | T1059 |
-| PsExec | T1021 |
-| Encoded commands | T1027 |
-| Ransomware behavior | T1486 |
-| Lateral movement | T1021 (family) |
-
-## Technology Stack
-
-| Layer | Tools |
-| --- | --- |
-| Backend | Python 3.11, FastAPI, SQLAlchemy, Pydantic, JWT auth |
-| Database | SQLite (local dev), PostgreSQL (Docker/production) |
-| Caching / Graph | Redis, Neo4j *(provisioned via Docker Compose; optional for pure local dev)* |
-| Frontend | React 19, Vite, Tailwind CSS, Axios, React Router, Chart.js |
-| Machine Learning | Scikit-learn, Pandas, NumPy, Joblib |
-| DevOps | Docker, Docker Compose, GitHub Actions CI, Pytest |
-
-## System Architecture
-
-```text
+Key Capabilities
+Detection and monitoring
+Log parsing and ingestion, including bulk log-file upload
+Rule-based and ML-assisted detection across 10 techniques (see below)
+Alert filtering, correlation, severity scoring, and dashboard statistics
+Investigation and response
+AI investigation copilot for natural-language alert analysis
+Explainable threat scoring with human-readable risk factors
+MITRE ATT&CK technique mapping and attack-chain visualization
+SOAR actions: block an IP, disable a user, kill a process, and auto-generate Sigma, Snort, or YARA rules
+Incident report generation and download (PDF, DOCX, HTML, Markdown)
+Threat intelligence
+VirusTotal, AbuseIPDB, WHOIS, and GeoIP lookups
+IP reputation analysis
+Threat Detection Modules
+Detector	MITRE ATT&CK technique
+Brute force	T1110
+Password spray	T1110.003
+Impossible travel	T1550
+Port scan	T1046
+Credential dumping	T1003
+Privilege escalation	T1068
+PowerShell abuse	T1059
+PsExec	T1021
+Encoded commands	T1027
+Ransomware behavior	T1486
+Lateral movement	T1021 (family)
+Technology Stack
+Layer	Tools
+Backend	Python 3.11, FastAPI, SQLAlchemy, Pydantic, JWT auth
+Database	SQLite (local dev), PostgreSQL (Docker/production)
+Caching / Graph	Redis, Neo4j (provisioned via Docker Compose; optional for pure local dev)
+Frontend	React 19, Vite, Tailwind CSS, Axios, React Router, Chart.js
+Machine Learning	Scikit-learn, Pandas, NumPy, Joblib
+DevOps	Docker, Docker Compose, GitHub Actions CI, Pytest
+System Architecture
                         Security Logs
                               │
                               ▼
@@ -108,13 +83,9 @@ AI-SOC Analytics Platform combines a FastAPI backend, a React dashboard, machine
                           ▼
              Threat Intel & MITRE Enrichment,
              Attack-Chain View, Report Generation
-```
-
 The Docker Compose stack provisions PostgreSQL, Redis, Neo4j, the FastAPI backend, and the production frontend container.
 
-## Project Structure
-
-```text
+Project Structure
 AI-SOC-Analytics-Platform/
 ├── backend/
 │   ├── api/              API routers (alerts, copilot, attack-chain, threat-intel, reports, SOAR)
@@ -133,192 +104,178 @@ AI-SOC-Analytics-Platform/
 │   ├── package.json
 │   └── vite.config.js
 ├── ML/
-│   ├── data/                Training data
-│   ├── models/               Saved/trained models
-│   ├── plots/                 Evaluation plots
-│   ├── reports/                Evaluation reports
-│   └── train_model.py
+│   ├── data/                 Training and prediction datasets
+│   ├── models/               Trained model and ML metadata
+│   ├── plots/                EDA and evaluation visualizations
+│   ├── reports/              Preprocessing and model reports
+│   ├── preprocessing.py      Data cleaning and preparation
+│   ├── eda.py                Exploratory data analysis
+│   ├── train_model.py        Model training and evaluation
+│   └── predict.py            Prediction pipeline
 ├── logs/                    Local log inputs
 ├── reports/                  Generated incident reports
 ├── .github/workflows/         CI pipeline (ci.yml)
 ├── docker-compose.yml         Full local service stack
 ├── Dockerfile                 Backend image definition
 └── README.md
-```
-
-## Quick Start
-
-### Option 1: Docker Compose (recommended)
-
+Quick Start
+Option 1: Docker Compose (recommended)
 From the repository root:
 
-```bash
 docker compose up --build
-```
-
-| Service | URL |
-| --- | --- |
-| Frontend | `http://localhost:5173` |
-| Backend | `http://localhost:8000` |
-| API docs (Swagger) | `http://localhost:8000/docs` |
-| Neo4j browser | `http://localhost:7474` |
-
+Service	URL
+Frontend	http://localhost:5173
+Backend	http://localhost:8000
+API docs (Swagger)	http://localhost:8000/docs
+Neo4j browser	http://localhost:7474
 To stop the stack:
 
-```bash
 docker compose down
-```
-
-### Option 2: Run backend and frontend separately
-
+Option 2: Run backend and frontend separately
 Prerequisites: Python 3.11+, Node.js and npm. PostgreSQL/Redis/Neo4j are only needed if you're not using SQLite for local dev.
 
-```bash
-git clone https://github.com/anus05/AI-SOC-Analytics-Platform.git
+git clone https://github.com/Abir-2005/AI-SOC-Analytics-Platform.git
 cd AI-SOC-Analytics-Platform
-```
+Backend:
 
-**Backend:**
-
-```bash
 cd backend
 python -m venv venv
-```
-
 Windows PowerShell:
-```powershell
+
 .\venv\Scripts\Activate.ps1
-```
-
-```bash
 pip install -r requirements.txt
-```
+Frontend (in a second terminal):
 
-**Frontend** (in a second terminal):
-
-```bash
 cd frontend
 npm install
-```
+Configuration
+The platform reads database, security, and service credentials from environment variables. Copy .env.example to .env in the project root:
 
-## Configuration
-
-The platform reads database, security, and service credentials from environment variables. Copy `.env.example` to `.env` in the project root:
-
-```bash
 cp .env.example .env
-```
+Key Environment Variables
+Variable	Description	Default / Example
+POSTGRES_USER	PostgreSQL Username	postgres
+POSTGRES_PASSWORD	PostgreSQL Password	postgres123
+POSTGRES_DB	PostgreSQL Database Name	aisoc
+DATABASE_URL	SQLAlchemy Database Connection URL	postgresql+psycopg2://postgres:postgres123@localhost:5432/aisoc (or sqlite:///./soc.db)
+AUTH_DATABASE_URL	Auth SQLite Database URL	sqlite:///backend/database/login.db
+NEO4J_USER	Neo4j Username	neo4j
+NEO4J_PASSWORD	Neo4j Password	password
+SECRET_KEY	JWT Secret Key for token signing	Long random secret string
+ALGORITHM	JWT Encoding Algorithm	HS256
+ACCESS_TOKEN_EXPIRE_MINUTES	JWT Token Expiration	60
+FRONTEND_URL	Frontend Origin (for CORS & resets)	http://localhost:5173
+VITE_API_URL	Backend URL for Frontend Build	http://localhost:8000
+GOOGLE_CLIENT_ID / VITE_GOOGLE_CLIENT_ID	Google OAuth Client ID	OAuth Client ID
+GEMINI_API_KEY	Gemini API Key for Copilot	Optional
+VIRUSTOTAL_API_KEY	VirusTotal API Key for Intel	Optional
+Docker Compose automatically injects containerized networking hostnames (postgres, redis, neo4j) while pulling secrets and credentials from .env. Rotate SECRET_KEY and any API keys before deploying in production.
 
-### Key Environment Variables
+Running Locally
+Backend (from the repository root, so the backend.* package imports resolve correctly):
 
-| Variable | Description | Default / Example |
-| --- | --- | --- |
-| `POSTGRES_USER` | PostgreSQL Username | `postgres` |
-| `POSTGRES_PASSWORD` | PostgreSQL Password | `postgres123` |
-| `POSTGRES_DB` | PostgreSQL Database Name | `aisoc` |
-| `DATABASE_URL` | SQLAlchemy Database Connection URL | `postgresql+psycopg2://postgres:postgres123@localhost:5432/aisoc` (or `sqlite:///./soc.db`) |
-| `AUTH_DATABASE_URL` | Auth SQLite Database URL | `sqlite:///backend/database/login.db` |
-| `NEO4J_USER` | Neo4j Username | `neo4j` |
-| `NEO4J_PASSWORD` | Neo4j Password | `password` |
-| `SECRET_KEY` | JWT Secret Key for token signing | Long random secret string |
-| `ALGORITHM` | JWT Encoding Algorithm | `HS256` |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | JWT Token Expiration | `60` |
-| `FRONTEND_URL` | Frontend Origin (for CORS & resets) | `http://localhost:5173` |
-| `VITE_API_URL` | Backend URL for Frontend Build | `http://localhost:8000` |
-| `GOOGLE_CLIENT_ID` / `VITE_GOOGLE_CLIENT_ID` | Google OAuth Client ID | OAuth Client ID |
-| `GEMINI_API_KEY` | Gemini API Key for Copilot | Optional |
-| `VIRUSTOTAL_API_KEY` | VirusTotal API Key for Intel | Optional |
-
-Docker Compose automatically injects containerized networking hostnames (`postgres`, `redis`, `neo4j`) while pulling secrets and credentials from `.env`. **Rotate `SECRET_KEY` and any API keys before deploying in production.**
-
-## Running Locally
-
-**Backend** (from the repository root, so the `backend.*` package imports resolve correctly):
-
-```bash
 python -m uvicorn backend.main:app --reload --port 8000
-```
-
 On Windows, after activating the project environment, you can also run the backend entry point directly:
 
-```powershell
 cd backend
 ..\.venv\Scripts\Activate.ps1
 python main.py
-```
-
 If the environment has not been set up yet, install the backend dependencies first:
 
-```bash
 python -m pip install -r backend/requirements.txt
-```
+Frontend (in a second terminal):
 
-**Frontend** (in a second terminal):
-
-```bash
 cd frontend
 npm run dev
-```
+Service	URL
+Frontend	http://localhost:5173
+Backend health	http://localhost:8000/health
+OpenAPI docs	http://localhost:8000/docs
+API Overview
+All protected endpoints require a bearer token returned by /auth/login.
 
-| Service | URL |
-| --- | --- |
-| Frontend | `http://localhost:5173` |
-| Backend health | `http://localhost:8000/health` |
-| OpenAPI docs | `http://localhost:8000/docs` |
+⚠️ Needs verification against current backend code: the two prior README drafts disagreed on a few routes below. Confirm these against backend/api/*.py and backend/auth/auth.py and update this table once verified — flagged rows are marked.
 
-## API Overview
+Authentication
+Method	Endpoint	Purpose
+POST	/auth/register	Register a user
+POST	/auth/login	Obtain an access token
+GET	/auth/me ⚠️	Get the current user (one draft had this as /auth/profile — verify)
+Alerts and detection
+Method	Endpoint	Purpose
+POST	/upload-logs	Upload and analyze a log file
+POST	/scan	Scan the configured log source
+GET	/alerts	List and filter alerts
+GET	/alerts/{alert_id}	Retrieve an alert
+GET	/statistics	Get alert statistics
+GET	/dashboard	Get dashboard data
+Investigation, reports, and response
+Method	Endpoint	Purpose
+POST	/api/copilot/investigate/{alert_id}	Investigate an alert with the AI copilot
+GET	/api/copilot/explain-score/{alert_id}	Explain an alert's threat score
+GET	/api/attack-chain/{alert_id}	Get an alert's attack chain
+GET	/api/threat-intel/{ip}	Enrich an IP address
+POST	/api/report/generate/{alert_id} ⚠️	Generate an incident report (one draft used separate /report/pdf, /report/docx, etc. — verify which pattern is implemented)
+GET	/api/report/download/{report_id}	Download a generated report
+POST	/api/soar/action	Execute a SOAR response action
+For complete request/response schemas, use the interactive OpenAPI docs at /docs.
 
-All protected endpoints require a bearer token returned by `/auth/login`.
+Machine Learning and Explainability
 
-> ⚠️ **Needs verification against current backend code:** the two prior README drafts disagreed on a few routes below. Confirm these against `backend/api/*.py` and `backend/auth/auth.py` and update this table once verified — flagged rows are marked.
+The machine-learning pipeline was developed around the CICIDS2017 intrusion-detection dataset and covers the complete workflow from raw network-flow data to trained-model prediction.
 
-### Authentication
+**Dataset & Preprocessing**
 
-| Method | Endpoint | Purpose |
-| --- | --- | --- |
-| `POST` | `/auth/register` | Register a user |
-| `POST` | `/auth/login` | Obtain an access token |
-| `GET` | `/auth/me` ⚠️ | Get the current user *(one draft had this as `/auth/profile` — verify)* |
+- Merged 8 CICIDS2017 CSV files into a single dataset containing **2,830,743 records and 80 columns**
+- Removed **256,479 duplicate rows**
+- Replaced **2,889 infinite values** and handled missing records
+- Removed **8 constant features**
+- Prepared the final ML dataset with **2,572,640 records and 71 columns**
+- Used **70 input features** with **15 traffic/attack classes**
+- Removed the `Source_File` field before model training
+- Encoded the target labels using Scikit-learn `LabelEncoder`
+- Cleaned column names and optimized the dataset for memory-efficient processing
 
-### Alerts and detection
+**Exploratory Data Analysis**
 
-| Method | Endpoint | Purpose |
-| --- | --- | --- |
-| `POST` | `/upload-logs` | Upload and analyze a log file |
-| `POST` | `/scan` | Scan the configured log source |
-| `GET` | `/alerts` | List and filter alerts |
-| `GET` | `/alerts/{alert_id}` | Retrieve an alert |
-| `GET` | `/statistics` | Get alert statistics |
-| `GET` | `/dashboard` | Get dashboard data |
+The EDA stage covers:
 
-### Investigation, reports, and response
+- Dataset structure, data types, and missing-value checks
+- Summary statistics
+- Attack-class distribution
+- Feature correlation analysis
+- Correlation heatmap
+- Top features correlated with the encoded target
 
-| Method | Endpoint | Purpose |
-| --- | --- | --- |
-| `POST` | `/api/copilot/investigate/{alert_id}` | Investigate an alert with the AI copilot |
-| `GET` | `/api/copilot/explain-score/{alert_id}` | Explain an alert's threat score |
-| `GET` | `/api/attack-chain/{alert_id}` | Get an alert's attack chain |
-| `GET` | `/api/threat-intel/{ip}` | Enrich an IP address |
-| `POST` | `/api/report/generate/{alert_id}` ⚠️ | Generate an incident report *(one draft used separate `/report/pdf`, `/report/docx`, etc. — verify which pattern is implemented)* |
-| `GET` | `/api/report/download/{report_id}` | Download a generated report |
-| `POST` | `/api/soar/action` | Execute a SOAR response action |
+**Model Development**
 
-For complete request/response schemas, use the interactive OpenAPI docs at `/docs`.
+Two supervised classification models were trained and evaluated:
 
-## Machine Learning and Explainability
+| Model | Accuracy | Precision | Recall | F1-Score |
+|---|---:|---:|---:|---:|
+| Decision Tree | 99.78% | 99.78% | 99.78% | 99.78% |
+| Random Forest | 99.79% | 99.78% | 99.79% | 99.78% |
 
-The ML pipeline predicts malicious behavior from extracted security-log features. Alert results include:
+The dataset was divided using an **80:20 stratified train/test split**. Due to the size of the dataset, a **stratified subset of the training portion** was used for model development while preserving class proportions.
 
-- Threat probability and confidence score
-- False-positive probability
-- Risk classification and risk factors
-- A human-readable explanation of the score
+For this experiment, the Random Forest model produced the highest measured accuracy and was saved for the prediction pipeline.
 
-Training data, trained models, evaluation plots, and reports are stored under `ML/`.
+**ML Artifacts**
 
-## Testing
+The ML workflow produces and maintains:
 
-```bash
+- `best_model.pkl` — trained classification model
+- `label_encoder.pkl` — encoded attack-class mapping
+- `feature_names.txt` — feature order required for inference
+- `prediction_results.csv` — prediction output
+- Evaluation reports and EDA reports
+- EDA and model-evaluation plots
+
+The `predict.py` module validates the required feature set, loads the trained model and label encoder, performs batch prediction, converts encoded outputs back to attack names, and stores the results as a CSV file.
+
+All machine-learning code, datasets, models, plots, and reports are organized under `ML/`.
+
+Testing
 # Backend
 pytest backend/tests -v
 
@@ -326,22 +283,53 @@ pytest backend/tests -v
 cd frontend
 npm run lint
 npm run build
-```
+CI runs the backend test suite automatically on push/PR via GitHub Actions (.github/workflows/ci.yml), with SKIP_DB_MIGRATION=true so tests don't depend on a live database.
 
-CI runs the backend test suite automatically on push/PR via GitHub Actions (`.github/workflows/ci.yml`), with `SKIP_DB_MIGRATION=true` so tests don't depend on a live database.
-
-## Contributors
-
-| Name | Role |
-| --- | --- |
-| Anusmita Ray Chaudhuri | Backend development, security engineering, FastAPI APIs, AI integration |
-| Anirban Ray | Full-stack development — frontend/dashboard UI, plus cross-team backend and integration support |
-| Abir Pramanick | Machine learning, model training, and evaluation |
-
-## License
-
+Contributors
+Name	Role
+Anusmita Ray Chaudhuri	Backend development, security engineering, FastAPI APIs, AI integration
+Anirban Ray	Full-stack development — frontend/dashboard UI, plus cross-team backend and integration support
+Abir Pramanick	Machine learning, data preprocessing, EDA, model training, evaluation, and prediction pipeline
+License
 This project is licensed under the MIT License.
 
----
-
 ⭐ If you find this project useful, consider giving it a star on GitHub.
+
+About
+
+No description, website, or topics provided.
+Resources
+Readme
+License
+Activity
+Stars
+0 stars
+Watchers
+0 watching
+Forks
+0 forks
+Releases
+No releases published
+Create a new release
+Packages
+No packages published
+Publish your first package
+Contributors
+3
+ (3)
+@AnirbanRay20
+AnirbanRay20Anirban Ray
+@anus05
+anus05Anusmita Ray Chaudhuri
+@Abir-2005
+Abir-2005ABIR PRAMANICK
+Languages
+JavaScript
+50%
+Python
+47.4%
+CSS
+2%
+Other
+0.6%
+Footer
